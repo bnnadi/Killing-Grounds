@@ -1,0 +1,12 @@
+Statement of Purpose:
+
+The purpose of this project is to create a simple multiplayer game that
+uses Node.js with Sockets.io to create the connection between clients.
+Sockets.io will allow us to easily use the websockets to make this interaction
+possible. The game will consist of a simple top-down shooter made using the
+canvas element.
+
+Responsibilities:
+
+Jean Amarante - Node.js/Javascript
+Bisike Nnadi - CSS/HTML/Javascript
