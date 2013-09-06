@@ -6,7 +6,11 @@ Sockets.io will allow us to easily use the websockets to make this interaction
 possible. The game will consist of a simple top-down shooter made using the
 canvas element.
 
+Version 1 features:
+User will have login functionality which will be checked against a database for verification. Also the ability to enter a single game by multiple users in different clients. 
+
 Responsibilities:
 
 Jean Amarante - Node.js/Javascript
 Bisike Nnadi - CSS/HTML/Javascript
+Matt Mohl - Node.js/Javascript
