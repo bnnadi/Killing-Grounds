@@ -10,6 +10,7 @@
 	var rise = 0;
 	var run = 0;
 	var angle = 0;
+	var mag;
 	var distance = 0;
 	var shot = false;
 	var score = 0;
@@ -59,7 +60,7 @@
 	}
 
 	var bullet = {
-		speed: 2000,
+		speed: 1700,
 		x: 240,
 		y: 240
 	}
@@ -90,14 +91,19 @@
 		}
 	});
 
-	// $(can).mousemove(function(e) {
-	// 	var stareX = e.pageX - $(this).offset().left;
-	// 	var stareY = e.pageY - $(this).offset().top;
+	$(can).mousemove(function(e) {
+		var stareX = e.pageX - $(this).offset().left;
+		var stareY = e.pageY - $(this).offset().top;
 
-	// 	var arg = (stareY-player.y)/(stareX-player.x);
-	// 	angle = Math.atan(arg);
-	// 	console.log(angle);
-	// })
+		var arg = (stareY-player.y)/(stareX-player.x);
+		angle = Math.atan(arg);
+		mag = (stareX > player.x) ? 1 : -1;
+
+
+
+		// console.log(angle);
+		console.log(mag);
+	})
 
 	var init = function() {
 		player.x = can.width / 2;
@@ -162,10 +168,10 @@
 
 		if(shot == false) {
 			ctx.fillStyle = '#000000';
-			ctx.fillRect(player.x, player.y, 5,5);
+			ctx.fillRect(player.x-2.5, player.y-2.5, 5,5);
 		}else if(shot== true) {
 			ctx.fillStyle = '#000000';
-			ctx.fillRect(bullet.x, bullet.y, 5,5);
+			ctx.fillRect(bullet.x-2.5, bullet.y-2.5, 5,5);
 		}
 
 		ctx.fillStyle = '#ee0000';
@@ -175,10 +181,14 @@
 			if(angle != 0) {
 				ctx.save();
 				ctx.translate(player.x, player.y);
-				ctx.rotate(angle);
-				ctx.drawImage(playerImage,player.x-15,player.y-15);
+				if(mag == 1) {
+					ctx.rotate(angle+1.56);
+				}else if(mag == -1) {
+					ctx.rotate(angle-1.56);
+				}
+				// ctx.rotate(angle+1.56);
+				ctx.drawImage(playerImage,-15,-15);
 				ctx.restore();
-				angle = 0;
 			}else{
 				ctx.drawImage(playerImage, player.x-15, player.y-15);
 			}
