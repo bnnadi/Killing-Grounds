@@ -2,12 +2,27 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
+        <link href='http://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<title>ASL game test</title>
 	</head>
 
     <body>
+    <nav>
+        <h2>Killing Grounds</h2>
+        <a href="login.html" id="logout">Logout</a>
+    </nav>
         <canvas id="stage"></canvas>
+
+        <div id="instructions">
+            <h3>Instructions</h3>
+            <ul>
+                <li>You can control your player by using 'ASWD'.</li>
+                <li> The way to shoot your enemy is by using the 'SPACE' bar.</li>
+                <li>Try to kill as many enemies as you can. Good Luck!</li>
+            </ul>
+        </div>
+
         <script type="text/javascript" src="js/game.js"></script>
     </body>
 </html>
