@@ -1,0 +1,101 @@
+html {
+    font-family: 'Amatic SC', Helvetica, Arial, sans-serif, cursive;
+    background-color: #d3d3d3;
+}
+
+body {
+    margin: 0 auto;
+}
+
+.hidden {
+   display: none;
+}
+/* The login screen */
+h1 {
+    font-size: 52px;
+    margin: 180px 580px 0;
+}
+
+form {
+    background-color: #000000;
+    width:  400px;
+    padding: 20px;
+    margin: 35px 500px 0;
+    border-radius: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+label {
+    color: #f5f5f5;
+    font-size: 20px;
+}
+
+input {
+    margin: 20px 5px 0;
+    width: 225px;
+    height: 25px;
+    font-size: 18px;
+}
+
+#register {
+    color: #808080;
+    margin-right: 10px;
+}
+
+#register:hover {
+    color: floralwhite;
+}
+
+#submit {
+    margin-left: 10px;
+    width: 150px;
+}
+
+/* the Game screen */
+
+nav {
+    background-color: #000000;
+    height: 80px;
+    width: 100%;
+}
+
+nav h2 {
+    font-size: 28px;
+    color: #f5f5f5;
+    float: left;
+    width: 60%;
+    margin-left: 10px;
+}
+
+nav a {
+    font-size: 18px;
+    color: #f5f5f5;
+    float: left;
+    width: 38%;
+    margin-top: 25px;
+    text-align: right;
+    text-decoration: underline;
+}
+
+#gameStage {
+    width: 1020px;
+    border: 2px #000000 solid;
+    border-radius: 5px;
+    background-color: ghostwhite;
+    margin: 40px auto 0;
+    height: 600px;
+}
+
+#instructions {
+    width: 450px;
+    margin: 0 auto;
+    font-size: 24px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+#instructions h3 {
+    font-size: 36px;
+    text-align: center;
+}
