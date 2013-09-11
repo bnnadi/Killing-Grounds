@@ -80,24 +80,25 @@ nav a {
 
 canvas {
     display: block;
-    margin: 0 auto;
+    margin: 40px 0 0 40px;
+    float: left;
 }
 
 #stage {
     width: 1020px;
+    height: 600px;
     border: 2px #000000 solid;
     border-radius: 5px;
     background-color: ghostwhite;
-    margin: 40px auto 0;
-    height: 600px;
 }
 
 #instructions {
-    width: 450px;
-    margin: 0 auto;
+    width: 360px;
+    margin-top: 180px;
     font-size: 24px;
     background-color: #f5f5f5;
     border-radius: 5px;
+    float: left;
 }
 
 #instructions h3 {

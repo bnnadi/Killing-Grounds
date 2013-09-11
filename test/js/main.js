@@ -32,7 +32,6 @@
 	var playerImage = new Image();
 	playerImage.onload = function() {
 		playerReady = true;
-		console.log('ready');
 	}
 	playerImage.src = "img/player.png";
 
@@ -101,8 +100,8 @@
 
 
 
-		// console.log(angle);
-		console.log(mag);
+		console.log(angle);
+		// console.log(mag);
 	})
 
 	var init = function() {
@@ -163,43 +162,32 @@
 	};
 
 	var render = function() {
-		ctx.fillStyle = '#dddddd';
-		ctx.fillRect(0,0,1424,700);
+		if(bgReady) {
+			ctx.drawImage(bgImage,0,0);
+		}
+
+		ctx.beginPath();
 
 		if(shot == false) {
-			ctx.fillStyle = '#000000';
-			ctx.fillRect(player.x-2.5, player.y-2.5, 5,5);
+			ctx.arc(player.x-3,player.y-3,6,0,2*Math.PI);
 		}else if(shot== true) {
-			ctx.fillStyle = '#000000';
-			ctx.fillRect(bullet.x-2.5, bullet.y-2.5, 5,5);
+			ctx.arc(bullet.x-3,bullet.y-3,6,0,2*Math.PI)
 		}
+		ctx.fillStyle = "#dd0000";
+		ctx.fill();
+		ctx.strokeStyle = "#ff0000";
+		ctx.stroke();
 
 		ctx.fillStyle = '#ee0000';
 		ctx.fillRect(enemy.x, enemy.y, 30,30);
 
 		if (playerReady) {
-			if(angle != 0) {
-				ctx.save();
-				ctx.translate(player.x, player.y);
-				if(mag == 1) {
-					ctx.rotate(angle+1.56);
-				}else if(mag == -1) {
-					ctx.rotate(angle-1.56);
-				}
-				// ctx.rotate(angle+1.56);
-				ctx.drawImage(playerImage,-15,-15);
-				ctx.restore();
-			}else{
-				ctx.drawImage(playerImage, player.x-15, player.y-15);
-			}
+			ctx.save();
+			ctx.translate(player.x, player.y);
+			ctx.rotate(angle + mag*1.56);
+			ctx.drawImage(playerImage,-15,-15);
+			ctx.restore();
 		}
-
-		// if(playerReady) {
-		// 	ctx.rotate(angle);
-		// 	ctx.drawImage(playerImage, player.x-15, player.y-15);
-		// 	ctx.rotate(-angle);
-		// 	angle = 0;
-		// }
 
 		ctx.fillStyle = "rgb(250, 250, 250)";
 		ctx.font = "24px Helvetica";
