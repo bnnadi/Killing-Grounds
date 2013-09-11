@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Killing Grounds</h1>
-        <form method="post" action="game.html">
+        <form method="post" action="index.html">
             <label>Login with you username and password</label><br>
 
             <input class="hidden" type="text" name="email" placeholder="your email"><br>
@@ -24,7 +24,7 @@
                 e.preventDefault();
                  console.log("New player");
                 console.log($(this).siblings('.hidden'));
-                 $(this).siblings('.hidden').show();
+                 $(this).siblings('.hidden').toggle();
             });
         });
     </script>
