@@ -1,0 +1,50 @@
+<?php
+include "controllers/home.php";
+
+ if (empty ($_GET["controller"])) {
+	$con = 'home';
+}else{
+	$con = $_GET["controller"];
+}
+
+if ($con == "index") {
+	$homeInstance = new Home();
+	$homeInstance->get($_GET);
+}else{
+	echo "the controller was not 'home'";
+}
+  
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Killing Grounds</title>
+    <link href='http://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css"  href="css/main.css">
+</head>
+<body>
+    <h1>Killing Grounds</h1>
+        <form method="post" action="game.html">
+            <label>Login with you username and password</label><br>
+
+            <input class="hidden" type="text" name="email" placeholder="your email"><br>
+            <input type="text" name="username" placeholder="username"><br class="hidden">
+            <input type="password" name="password" placeholder="password"><br>
+            <input class="hidden" type="password" name="confirm" placeholder="confirm password"><br>
+            <a id="register">Not a user? Register here...</a><input id="submit" type="submit" title="Submit">
+        </form>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+        jQuery(function($){
+             $("#register").on('click',function(e){
+                e.preventDefault();
+                 console.log("New player");
+                console.log($(this).siblings('.hidden'));
+                 $(this).siblings('.hidden').toggle();
+            });
+        });
+    </script>
+</body>
+</html>
