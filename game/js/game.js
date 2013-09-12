@@ -16,27 +16,15 @@
             return;
         }
 
-        function enterFrame () {
-            checkKeys();
-            update();
-            render();
-        }
-
-        // canvasApp level variables
+        // application level variables
         var stageWidth = 800;
         var stageHeight = 500;
+        var xMin = 0;
+        var yMin = 0;
+        var xMax = stageWidth;
+        var yMax = stageHeight;
         var player = {};
-
-        /*var rotation = 0;
-        var x = 50;
-        var y = 50;
-        var facingX = 0;
-        var facingY = 0;
-        var movingX = 0;
-        var movingY = 0;
-        var rotationalVelocity = 5;
-        var thrustAcceleration = 0.03;
-        var maxVelocity = 2;*/
+        var playerMissiles = [];
         var keyPressList = [];
 
         function init () {
@@ -54,6 +42,14 @@
             player.rotationalVelocity = 5;
             player.thrustAcceleration = 0.03;
             player.maxVelocity = 2;
+            player.missileFrameCount = 0;
+            player.missileDelay = 10;
+        }
+
+        function enterFrame () {
+            checkKeys();
+            update();
+            render();
         }
 
         function checkKeys () {
@@ -82,20 +78,86 @@
                 // rotate clockwise
                 player.rotation += player.rotationalVelocity;
             }
+
+            if (keyPressList[32] == true) {
+                if (player.missileFrameCount > player.missileDelay) {
+                    fireMissile();
+                    player.missileFrameCount = 0;
+                }
+            }
+        }
+
+        function fireMissile () {
+            var newPlayerMissile = {};
+            newPlayerMissile.dx = 5 * Math.cos(Math.PI*(player.rotation)/180);
+            newPlayerMissile.dy = 5 * Math.sin(Math.PI*(player.rotation)/180);
+            newPlayerMissile.x = player.x + 10;
+            newPlayerMissile.y = player.y + 10;
+            newPlayerMissile.life = 60;
+            newPlayerMissile.lifeCtr = 0;
+            newPlayerMissile.width = 2;
+            newPlayerMissile.height = 2;
+            playerMissiles.push(newPlayerMissile);
         }
 
         function update () {
             updatePlayer();
+            updateMissiles();
         }
 
         function updatePlayer () {
             player.x = player.x + player.movingX;
             player.y = player.y + player.movingY;
+
+            if (player.x < xMin-20) {
+                player.x = xMax;
+            }
+            else if (player.x > xMax+20) {
+                player.x = xMin;
+            }
+            else if (player.y < yMin-20) {
+                player.y = yMax;
+            }
+            else if (player.y > yMax+20) {
+                player.y = yMin;
+            }
+
+            player.missileFrameCount++;
+        }
+
+        function updateMissiles () {
+            for (var i = 0, max = playerMissiles.length-1; i < max; i++)
+            {
+                var missile = playerMissiles[i];
+                missile.x += missile.dx;
+                missile.y += missile.dy;
+
+                if (missile.x > xMax) {
+                    missile.x =- missile.width;
+                }
+                else if (missile.x < -missile.width) {
+                    missile.x = xMax;
+                }
+
+                if (missile.y > yMax) {
+                    missile.y =- missile.width;
+                }
+                else if (missile.y < -missile.height) {
+                    missile.y = yMax;
+                }
+
+                missile.lifeCtr++;
+                if (missile.lifeCtr > missile.life) {
+                    playerMissiles.splice(i, 1);
+                    missile = null;
+                }
+            }
         }
 
         function render () {
             renderBackground();
             renderPlayerShip();
+            renderPlayerMissiles();
         }
 
         function renderBackground () {
@@ -111,6 +173,13 @@
 
             // translate the canvas origin to the center of the player
             graphics.translate(player.x + 10, player.y + 10);
+
+            graphics.fillStyle = "#ffffff";
+            graphics.fillText("player", -15, -30);
+            graphics.font = "15px _sans";
+            graphics.textAlign = "middle";
+            graphics.textBaseline = 'top';
+
             graphics.rotate(angleInRadians);
 
             // Color depends on whether if its player or enemy
@@ -130,6 +199,30 @@
             graphics.closePath();
 
             graphics.restore();
+        }
+
+        function renderPlayerMissiles () {
+            for (var i = 0, max = playerMissiles.length-1; i < max; i++) {
+                var missile = playerMissiles[i];
+
+                graphics.save();
+                graphics.setTransform(1,0,0,1,0,0); // reset to identity
+
+                graphics.translate(missile.x+1, missile.y+1);
+                graphics.strokeStyle = "#ffffff";
+
+                graphics.beginPath();
+
+                // draw everything offset by 1/2. Zero relative 1/2 is 15
+                graphics.moveTo(-1,-1);
+                graphics.lineTo(1,-1);
+                graphics.lineTo(1,1);
+                graphics.lineTo(-1,1);
+                graphics.lineTo(-1,-1);
+                graphics.stroke();
+                graphics.closePath();
+                graphics.restore();
+            }
         }
 
         document.onkeydown = function (e) {

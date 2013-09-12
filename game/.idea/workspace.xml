@@ -8,7 +8,7 @@
     <file path="/index.html" changelist="6aee4cf4-a85e-4e59-840c-da6ce8186806" time="1378920753954" ignored="false" />
     <file path="/main.css" changelist="6aee4cf4-a85e-4e59-840c-da6ce8186806" time="1378779861382" ignored="false" />
     <file path="/test.js" changelist="6aee4cf4-a85e-4e59-840c-da6ce8186806" time="1378855741742" ignored="false" />
-    <file path="/game.js" changelist="6aee4cf4-a85e-4e59-840c-da6ce8186806" time="1378937392161" ignored="false" />
+    <file path="/game.js" changelist="6aee4cf4-a85e-4e59-840c-da6ce8186806" time="1378944098016" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +40,7 @@
       <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="26" selection-start="390" selection-end="390" vertical-scroll-proportion="0.026685392">
+            <state line="81" column="22" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.18454936">
               <folding />
             </state>
           </provider>
@@ -65,8 +65,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="603" />
     <option name="y" value="22" />
-    <option name="width" value="1440" />
+    <option name="width" value="837" />
     <option name="height" value="835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -132,7 +133,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="835" extended-state="7" />
+    <frame x="603" y="22" width="837" height="835" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -263,7 +264,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="26" selection-start="390" selection-end="390" vertical-scroll-proportion="0.026685392">
+        <state line="81" column="22" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.18454936">
           <folding />
         </state>
       </provider>
