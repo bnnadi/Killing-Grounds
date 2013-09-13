@@ -22,9 +22,9 @@
         $_SESSION['loggedin'] = 'true';
         $_SESSION['username'] = $user;
         $_SESSION['userid'] = $userID;
-//        header('Location: home');
+		//header('Location: game.php');
     } else {
-        echo "<p>Username or Password do not match.</p>";
+        echo "<p id='loginInfo'>Username or Password do not match.</p>";
     }
 
 ?>

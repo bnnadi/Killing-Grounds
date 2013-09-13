@@ -7,7 +7,7 @@
 		
 		function getView($file = '', $data = '') {
 				
-			$fullPath = "/Users/bisikennadi/Desktop/NodeJSGroupProject/game/views/$file.html";
+			$fullPath = "/Applications/MAMP/htdocs/views/$file.php";
 			
 			if (preg_match("/\w/", $file) && file_exists($fullPath)) {
 				

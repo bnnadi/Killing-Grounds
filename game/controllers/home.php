@@ -4,16 +4,16 @@
  class Home {
  	function get($pairs,$data = '') {
  		$view_model = new View();
-		$view_model->getView("header");
-	
+		
  		if (empty($pairs[action])) {
-			 $action= 'login';
+			 $action= 'home';
 			$view_model->getView($action);
 		}else {
+			include "controllers/LogOut.php";
 			 $action = $pairs['game'];
 			 $view_model->getView($action);
 		 }
- 		$view_model->getView("footer");
+
 	}
  }
 ?>
