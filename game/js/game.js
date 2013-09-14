@@ -25,8 +25,6 @@
         var ships = [];
         var keyPressList = [];
 
-
-
         function init () {
             var rX = Math.random()*stageWidth;
             var rY = Math.random()*stageHeight;
@@ -36,7 +34,6 @@
 
             initShip(String(Math.random()*100000000), rX, rY);
             socket.emit('connect', {'name': player.name, 'x': player.x, 'y': player.y, 'rotation': player.rotation});
-
         }
 
         function initShip (name, x, y) {
@@ -59,8 +56,8 @@
 
         function enterFrame () {
             checkKeys();
-            update();
             render();
+            update();
         }
 
         function checkKeys () {
@@ -95,7 +92,7 @@
                 if (player.missileFrameCount > player.missileDelay) {
                     fireMissile();
                     player.missileFrameCount = 0;
-                    socket.emit('player.fire', {'name': player.name, 'missiles': player.missiles});
+                    socket.emit('missile.update', {'name': player.name, 'missiles': player.missiles});
                 }
             }
         }
@@ -116,8 +113,8 @@
         function update () {
             grabPlayers();
             updatePlayer();
-//            updateMissiles();
-//            checkCollision();
+            checkCollision();
+            updateMissiles();
         }
 
         function grabPlayers () {
@@ -147,54 +144,45 @@
         }
 
         function checkCollision () {
-            for (var i = 0, max = ships.length; i < max; i++) {
+            for (var i = player.missiles.length-1; i >= 0; i--) {
+                var missile = player.missiles[i];
+                for (var j = 0, max = ships.length; j < max; j++) {
+                    if (ships[j].name != player.name) {
+                        var dX = missile.x - ships[j].x;
+                        var dY = missile.y - ships[j].y;
+                        var distance = Math.sqrt((dX*dX) + (dY*dY));
 
-                for (var j = 0; j < max; j++) {
-                    if (ships[i].name != ships[j].name) {
-                        verifyHit(ships[i], ships[j]);
+                        if (distance <= 10) {
+                            socket.emit('enemy.hit', ships[j]);
+                            player.missiles.splice(i, 1);
+                            missile = null;
+                            socket.emit('missile.update', {'name': player.name, 'missiles': player.missiles});
+                            return;
+                        }
                     }
-                }
-
-            }
-        }
-
-        function verifyHit (ship1, ship2) {
-            for (var i = 0, max = ship1.missiles.length; i < max; i++) {
-                var missile = ship1.missiles[i];
-                var dX = missile.x - ship2.x;
-                var dY = missile.y - ship2.y;
-                var distance = Math.sqrt((dX*dX) + (dY*dY));
-
-                if (distance <= 10) {
-//                    socket.emit('enemy.hit', ship2);
-                    ship1.missiles.splice(i, 1);
-                    missile = null;
-                    return;
                 }
             }
         }
 
         function updateMissiles () {
-            for (var i = 0, iMax = ships.length; i < iMax; i++) {
-
-                for (var j = ships[i].missiles.length-1; j >= 0; j--) {
-                    var missile = ships[i].missiles[j];
-                    missile.x += missile.dx;
-                    missile.y += missile.dy;
-                    missile.lifeCtr++;
-                    if (missile.lifeCtr > missile.life) {
-                        ships[i].missiles.splice(j, 1);
-                        missile = null;
-                    }
+            for (var i = player.missiles.length-1; i >= 0; i--) {
+                var missile = player.missiles[i];
+                missile.x += missile.dx;
+                missile.y += missile.dy;
+                missile.lifeCtr++;
+                if (missile.lifeCtr > missile.life) {
+                    player.missiles.splice(i, 1);
+                    missile = null;
                 }
-
             }
+
+            socket.emit('missile.update', {'name': player.name, 'missiles': player.missiles});
         }
 
         function render () {
             renderBackground();
             renderShips();
-//            renderMissiles();
+            renderMissiles();
         }
 
         function renderBackground () {
@@ -289,7 +277,6 @@
             ships = [];
             for (var ship in data) {
                 ships.push(data[ship]);
-                console.log(ship.missiles);
             }
         });
 

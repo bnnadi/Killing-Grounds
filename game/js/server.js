@@ -27,16 +27,15 @@ io.sockets.on('connection', function (socket) {
         p.x = data.x;
         p.y = data.y;
         p.rotation = data.rotation;
-        p.missiles = data.missiles;
 //        console.log("x: " + p.x, "y: " + p.y, "r: " + p.rotation);
-    });
-
-    socket.on('player.fire', function (data) {
-        players[data.name].missiles = data.missiles;
     });
 
     socket.on('player.hit', function (data) {
         console.log(data.name + ' has been hit.');
+    });
+
+    socket.on('missile.update', function (data) {
+        players[data.name].missiles = data.missiles;
     });
 
     /*------------------------------
