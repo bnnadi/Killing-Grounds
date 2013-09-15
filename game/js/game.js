@@ -53,7 +53,7 @@
         }
 
         function checkKeys () {
-            if (keyPressList[38] == true) {
+            if (keyPressList[38] == true || keyPressList[87]) {
                 // thrust
                 var angleInRadians = player.rotation * Math.PI / 180;
                 player.facingX = Math.cos(angleInRadians);
@@ -69,12 +69,12 @@
                 }
             }
 
-            if (keyPressList[37] == true) {
+            if (keyPressList[37] == true || keyPressList[65]) {
                 // rotate counterclockwise
                 player.rotation -= player.rotationalVelocity;
             }
 
-            if (keyPressList[39] == true) {
+            if (keyPressList[39] == true || keyPressList[68]) {
                 // rotate clockwise
                 player.rotation += player.rotationalVelocity;
             }

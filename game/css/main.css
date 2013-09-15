@@ -39,17 +39,41 @@ input {
 }
 
 #register {
+    transition: .2s color;
     color: #808080;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 #register:hover {
-    color: floralwhite;
+    transition: .2s color;
+    color: floralwhite; /*floralwhite? really?*/
 }
 
 #submit {
     margin-left: 10px;
     width: 150px;
+}
+
+#leaderboards {
+    transition: .2s color;
+    display: block;
+    color: #808080;
+    padding: 13px 0 0 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#leaderboards:hover {
+    transition: .2s color;
+    color: floralwhite;
+}
+
+footer {
+    height: 50px; 
+    background-color: #000; 
+    margin-top: 156px;
+    clear: both;
 }
 
 /* the Game screen */
