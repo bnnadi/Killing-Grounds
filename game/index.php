@@ -7,11 +7,10 @@ include "controllers/home.php";
 	$con = $_GET["controller"];
 }
 
-if ($con == "index") {
+if ($con == "home") {
 	$homeInstance = new Home();
 	$homeInstance->get($_GET);
-}else{
-	echo "the controller was not 'home'";
+} else {
+
 }
-  
 ?>
