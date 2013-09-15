@@ -11,7 +11,7 @@ body {
     display: none;
 }
 /* The login screen */
-h1 {
+.home-head {
     font-size: 52px;
     margin: 180px 580px 0;
 }
@@ -80,6 +80,17 @@ footer {
     clear: both;
 }
 
+footer a {
+    transition: .2s color;
+    color: #808080;
+}
+
+footer a:hover {
+    transition: .2s color;
+    color: floralwhite;
+    cursor: pointer;
+}
+
 /* the Game screen */
 
 nav {
@@ -133,3 +144,67 @@ canvas {
     font-size: 36px;
     text-align: center;
 }
+
+
+/* Leaderboards screen */
+
+.leader-head {
+    font-size: 52px;
+    text-align: center;
+    margin: 100px;
+}
+
+.leaderboard {
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #000;
+    padding: 15px 0;
+}
+
+ol {
+    margin-left: 40px;
+    margin-right: 10px;
+    padding: 0;
+}
+
+ol li {
+    font-size: 32px;
+    color: #fff;
+    margin-top: 20px;
+    border-bottom: 1px solid #fff;
+}
+
+ol li p:first-child {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+ol li p:last-child {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    float: right;
+    text-align: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

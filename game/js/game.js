@@ -33,7 +33,7 @@
             if (rY < 50) { rY += 60; }  else if (rY > stageHeight-50) { rY -= 60; }
 
             initShip(String(Math.random()*100000000), rX, rY);
-            socket.emit('connect', {'name': player.name, 'x': player.x, 'y': player.y, 'rotation': player.rotation});
+            socket.emit('connect', {'name': player.name, 'x': player.x, 'y': player.y, 'rotation': player.rotation, 'score': player.score});
         }
 
         function initShip (name, x, y) {
@@ -51,6 +51,7 @@
             player.missileFrameCount = 0;
             player.missileDelay = 10;
             player.name = name;
+            player.score = 0;
             ships.push(player);
         }
 
@@ -115,6 +116,7 @@
             updatePlayer();
             checkCollision();
             updateMissiles();
+            updateTime();
         }
 
         function grabPlayers () {
@@ -143,6 +145,16 @@
             player.missileFrameCount++;
         }
 
+        function updateTime() {
+            totalTime+= intervalTime/1000;
+            if(totalTime >= 5) {
+                clearInterval(interval);
+                var pop = document.getElementById("pop-up")
+                pop.setAttribute('style', 'display: block;');
+                console.log(pop);
+            }
+        }
+
         function checkCollision () {
             for (var i = player.missiles.length-1; i >= 0; i--) {
                 var missile = player.missiles[i];
@@ -153,7 +165,8 @@
                         var distance = Math.sqrt((dX*dX) + (dY*dY));
 
                         if (distance <= 10) {
-                            socket.emit('enemy.hit', ships[j]);
+                            player.score += 100;
+                            socket.emit('player.hit', ships[j]);
                             player.missiles.splice(i, 1);
                             missile = null;
                             socket.emit('missile.update', {'name': player.name, 'missiles': player.missiles});
@@ -183,6 +196,7 @@
             renderBackground();
             renderShips();
             renderMissiles();
+            renderTime();
         }
 
         function renderBackground () {
@@ -263,6 +277,15 @@
             graphics.restore();
         }
 
+        function renderTime() {
+            graphics.fillStyle = "rgba(250,250,250, .5)";
+            graphics.font = "40px Helvetica";
+            graphics.textAlign = "center";
+            graphics.textBaseline = "top";
+            graphics.fillText(Math.round(60 - totalTime), stage.width/2, 30);
+            graphics.font = "16px _sans";
+        }
+
         document.onkeydown = function (e) {
             e = e?e:window.event;
             keyPressList[e.keyCode] = true;
@@ -288,7 +311,8 @@
         //*** application loop
         const FRAME_RATE = 40;
         var intervalTime = 1000/FRAME_RATE;
-        setInterval(enterFrame, intervalTime);
+        var totalTime = 0;
+        var interval = setInterval(enterFrame, intervalTime);
     }
 
 })();

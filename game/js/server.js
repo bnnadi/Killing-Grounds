@@ -9,6 +9,7 @@ function Player(name, x, y, rotation) {
     this.y = y;
     this.rotation = rotation;
     this.missiles = [];
+    this.score = 0;
 }
 
 var players = {};
