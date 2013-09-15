@@ -147,7 +147,7 @@
 
         function updateTime() {
             totalTime+= intervalTime/1000;
-            if(totalTime >= 5) {
+            if(totalTime >= 60) {
                 clearInterval(interval);
                 var pop = document.getElementById("pop-up")
                 pop.setAttribute('style', 'display: block;');
