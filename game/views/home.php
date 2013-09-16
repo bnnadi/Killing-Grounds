@@ -1,6 +1,8 @@
 <?php
 	include "controllers/SignIn.php";
 	include "controllers/SignUp.php";
+	
+	
 ?>
 <!DOCTYPE html>
 <html>
